@@ -123,7 +123,6 @@ dual-pincer/
 │   └── global-setup.sh                  ← One-command global install script
 ├── package.json                         ← npm package manifest
 ├── README.md                            ← You are here
-├── INSTALL.md                           ← Installation instructions
 ├── context.md                           ← Project context for AI agents
 ├── agents.md                            ← Agent documentation
 └── LICENSE                              ← MIT
