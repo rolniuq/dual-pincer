@@ -2,9 +2,31 @@
 
 > **An OpenCode plugin that runs two independent AI agents in parallel to debate any plan or prompt from opposite directions, then reconciles their analyses into a stronger result.**
 
+[![GitHub](https://img.shields.io/badge/github-rolniuq/dual--pincer-blue)](https://github.com/rolniuq/dual-pincer)
+[![npm](https://img.shields.io/npm/v/dual-pincer-plugin)](https://www.npmjs.com/package/dual-pincer-plugin)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+---
+
 ## How It Works
 
 Dual Pincer applies a structured debate workflow to any prompt:
+
+```
+User Prompt  ──▶  Mediator Drafts Plan
+                       │
+              ┌────────┴────────┐
+              ▼                 ▼
+         Steelman           Red Team
+       (defends it)       (attacks it)
+              │                 │
+              └────────┬────────┘
+                       ▼
+              Mediator finds the CRUX
+                       │
+                       ▼
+              Revised, stronger result
+```
 
 1. **Draft** — The mediator agent analyzes your request and produces a draft plan/response
 2. **Debate** — Two independent agents review the draft simultaneously:
@@ -15,19 +37,20 @@ Dual Pincer applies a structured debate workflow to any prompt:
 
 The result is a better answer than either agent alone could produce.
 
+---
+
 ## Installation
 
-### Prerequisites
+### 🎯 Install as an OpenCode Plugin
 
-- [OpenCode](https://opencode.ai) CLI with plugin support
-
-### Install via npm
+#### Option A: Using npm (recommended)
 
 ```bash
+# Install the package
 npm install dual-pincer-plugin
 ```
 
-Then add it to your `.opencode/opencode.jsonc`:
+Then register the plugin in your project's `.opencode/opencode.jsonc`:
 
 ```json
 {
@@ -35,15 +58,33 @@ Then add it to your `.opencode/opencode.jsonc`:
 }
 ```
 
-### Or install directly from GitHub
+> **Note:** The plugin's agents (`dual-pincer-mediator`, `dual-pincer-steelman`, `dual-pincer-redteam`) and command (`/dual-pincer`) are auto-discovered from the package's `.opencode/` directory.
+
+#### Option B: Using GitHub directly
 
 ```bash
 npm install github:rolniuq/dual-pincer
 ```
 
-### Local development install
+Then add the same plugin reference to your `.opencode/opencode.jsonc`.
 
-Clone the repo and reference it directly:
+#### Option C: Local checkout
+
+```bash
+git clone git@github.com:rolniuq/dual-pincer.git
+cd dual-pincer
+npm install
+```
+
+Then reference it from your project's `.opencode/opencode.jsonc`:
+
+```json
+{
+  "plugin": ["../path/to/dual-pincer/.opencode/plugins/dual-pincer-plugin.ts"]
+}
+```
+
+Or if you're working inside the cloned repo itself, it's already configured:
 
 ```json
 {
@@ -51,39 +92,107 @@ Clone the repo and reference it directly:
 }
 ```
 
+### 📦 Install for Plugin Development
+
+```bash
+git clone git@github.com:rolniuq/dual-pincer.git
+cd dual-pincer
+npm install
+```
+
+The plugin is self-contained. All dependencies are in `.opencode/package.json`.
+
+---
+
 ## Usage
 
-Use the command or invoke the mediator agent directly:
+### Via CLI command
 
 ```
 /dual-pincer <your prompt>
 ```
 
-Or use the `dp_analyze` tool from any agent that has it enabled.
+### Via mediator agent directly
+
+Run the `dual-pincer-mediator` agent from OpenCode's agent picker.
+
+### Via `dp_analyze` tool
+
+Any agent that has the `dp_analyze` tool enabled can call it:
+
+```
+Use dp_analyze with this draft: ...
+```
 
 ### Example
 
 ```
-/dual-pincer Should we use React Server Components for our new dashboard?
+/dual-pincer Should we migrate from REST to GraphQL?
 ```
 
 The mediator will:
-1. Draft a plan for using RSC
+1. Draft a migration plan
 2. Have Steelman argue FOR and Red Team argue AGAINST
 3. Find the crux of the disagreement
 4. Give you a revised, stronger recommendation
 
-## Agent Files
+---
+
+## What's the Crux?
+
+The **crux** is the single assumption or claim where Steelman says "looks fine" and Red Team says "this is broken." Most debate happens at the edges — the crux is where they collide head-on. By identifying it, you get a targeted insight that no single agent would surface on its own.
+
+---
+
+## Agents & Commands
 
 This plugin registers three agents and one command:
 
-| File | Purpose |
-|------|---------|
-| `dual-pincer-mediator` | Orchestrator — runs the full workflow |
-| `dual-pincer-steelman` | Subagent — defends the draft |
-| `dual-pincer-redteam` | Subagent — attacks the draft |
-| `/dual-pincer` | CLI command — shortcut to invoke the mediator |
+| Name | Mode | Description |
+|------|------|-------------|
+| `dual-pincer-mediator` | `primary` | Orchestrates the full workflow (draft → analyze → crux → revise) |
+| `dual-pincer-steelman` | `subagent` | Pincer A — builds the strongest defense of the draft |
+| `dual-pincer-redteam` | `subagent` | Pincer B — attacks the draft ruthlessly |
+| `/dual-pincer` | command | CLI shortcut to invoke the mediator |
+
+See [`agents.md`](agents.md) for detailed documentation.
+
+---
+
+## File Structure
+
+```
+dual-pincer/
+├── .opencode/
+│   ├── agents/
+│   │   ├── dual-pincer-mediator.md      ← Workflow orchestrator
+│   │   ├── dual-pincer-steelman.md      ← Defense agent
+│   │   └── dual-pincer-redteam.md       ← Attack agent
+│   ├── commands/
+│   │   └── dual-pincer.md               ← CLI entry point
+│   ├── plugins/
+│   │   └── dual-pincer-plugin.ts        ← Plugin code (dp_analyze tool)
+│   ├── rules/
+│   │   ├── development.md               ← Development rules
+│   │   └── agent-behavior.md            ← Agent behavior rules
+│   └── opencode.jsonc                   ← Plugin registration
+├── package.json                         ← npm package manifest
+├── README.md                            ← You are here
+├── context.md                           ← Project context for AI agents
+├── agents.md                            ← Agent documentation
+└── LICENSE                              ← MIT
+```
+
+---
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE).
+
+---
+
+## Links
+
+- **GitHub:** [rolniuq/dual-pincer](https://github.com/rolniuq/dual-pincer)
+- **npm:** [dual-pincer-plugin](https://www.npmjs.com/package/dual-pincer-plugin)
+- **OpenCode:** [opencode.ai](https://opencode.ai)
