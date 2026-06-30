@@ -117,6 +117,8 @@ dual-pincer/
 │   │   ├── development.md               ← Development rules
 │   │   └── agent-behavior.md            ← Agent behavior rules
 │   └── opencode.jsonc                   ← Plugin registration
+├── bin/
+│   └── global-setup.sh                  ← One-command global install script
 ├── package.json                         ← npm package manifest
 ├── README.md                            ← You are here
 ├── INSTALL.md                           ← Installation instructions
