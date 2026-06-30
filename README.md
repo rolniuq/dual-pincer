@@ -107,6 +107,7 @@ See [`agents.md`](agents.md) for detailed documentation.
 ```
 dual-pincer/
 ├── .opencode/
+│   ├── INSTALL.md                       ← Install instructions (fetched remotely)
 │   ├── agents/
 │   │   ├── dual-pincer-mediator.md      ← Workflow orchestrator
 │   │   ├── dual-pincer-steelman.md      ← Defense agent
@@ -120,8 +121,9 @@ dual-pincer/
 │   │   └── agent-behavior.md            ← Agent behavior rules
 │   └── opencode.jsonc                   ← Plugin registration
 ├── bin/
-│   └── global-setup.sh                  ← One-command global install script
+│   └── global-setup.sh                  ← Bash fallback for manual install
 ├── package.json                         ← npm package manifest
+├── package-lock.json                    ← Dependency lock
 ├── README.md                            ← You are here
 ├── context.md                           ← Project context for AI agents
 ├── agents.md                            ← Agent documentation
