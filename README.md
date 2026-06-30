@@ -41,13 +41,9 @@ The result is a better answer than either agent alone could produce.
 
 ## Installation
 
-Open OpenCode, then copy this prompt and paste into terminal:
+Tell OpenCode:
 
-```
-Run bash bin/global-setup.sh to install dual-pincer plugin globally by symlinking agents/commands into ~/.config/opencode/ and registering it in opencode.jsonc
-```
-
-That's it. OpenCode will handle everything.
+> Fetch and follow instructions from https://raw.githubusercontent.com/rolniuq/dual-pincer/main/.opencode/INSTALL.md
 
 ---
 

@@ -1,14 +1,10 @@
 # Installation
 
-## ⚡ One-Click Install (Recommended)
+## ⚡ One Click
 
-Open OpenCode in this repo, then copy this prompt and paste into terminal:
+Tell OpenCode:
 
-```
-Run bash bin/global-setup.sh to install dual-pincer plugin globally by symlinking agents/commands into ~/.config/opencode/ and registering it in opencode.jsonc
-```
-
-OpenCode will handle the rest. After that, `/dual-pincer` works in **any** project.
+> Fetch and follow instructions from https://raw.githubusercontent.com/rolniuq/dual-pincer/main/.opencode/INSTALL.md
 
 ---
 
