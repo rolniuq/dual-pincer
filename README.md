@@ -41,7 +41,13 @@ The result is a better answer than either agent alone could produce.
 
 ## Installation
 
-Read [`INSTALL.md`](INSTALL.md) for full installation instructions (npm, GitHub, or local checkout).
+Open OpenCode, then copy this prompt and paste into terminal:
+
+```
+Run bash bin/global-setup.sh to install dual-pincer plugin globally by symlinking agents/commands into ~/.config/opencode/ and registering it in opencode.jsonc
+```
+
+That's it. OpenCode will handle everything.
 
 ---
 
