@@ -1,0 +1,37 @@
+{
+  "name": "dual-pincer-plugin",
+  "version": "1.0.0",
+  "description": "An OpenCode plugin that runs two independent AI agents (Steelman + Red Team) in parallel to debate any plan or prompt from opposite directions, then reconciles their analyses into a stronger result.",
+  "main": ".opencode/plugins/dual-pincer-plugin.ts",
+  "type": "module",
+  "keywords": [
+    "opencode",
+    "plugin",
+    "debate",
+    "analysis",
+    "ai",
+    "red-team",
+    "steelman",
+    "dual-pincer"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolniuq/dual-pincer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rolniuq/dual-pincer/issues"
+  },
+  "homepage": "https://github.com/rolniuq/dual-pincer#readme",
+  "author": "rolniuq",
+  "files": [
+    ".opencode/plugins/",
+    ".opencode/agents/",
+    ".opencode/commands/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.17.0"
+  }
+}

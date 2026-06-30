@@ -1,0 +1,4 @@
+{
+  "$schema": "https://opencode.ai/schema/opencode.jsonc",
+  "plugin": [".opencode/plugins/dual-pincer-plugin.ts"]
+}
